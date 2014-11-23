@@ -23,7 +23,7 @@ class Admin_UsersController extends \BaseController {
         // Creamos un nuevo objeto User para ser usado por el helper Form::model
         $user = new User;
         $form_data = array('route' => 'admin.users.store', 'method' => 'POST');
-        $action    = 'Crear';
+        $action    = 'Crear..';
 
         return View::make('admin/users/form', compact('user', 'form_data', 'action'));
 
