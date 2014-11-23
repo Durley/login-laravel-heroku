@@ -9,9 +9,11 @@
 <p>Full name: {{ $user->full_name }}</p>
 <p>Email: {{ $user->email }}</p>
 
-{{ Form::model($user, array('route' => array('admin.users.edit', $user->id), 'method' => 'PATCH'), array('role' => 'form'))}}
-{{ Form::submit('Editar usuario', array('class' => 'btn btn-primary')) }}
-{{ Form::close() }}
+<p>
+    <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-primary">
+        Editar
+    </a>
+</p>
 
 {{ Form::model($user, array('route' => array('admin.users.destroy', $user->id), 'method' => 'DELETE'), array('role' => 'form')) }}
 {{ Form::submit('Eliminar usuario', array('class' => 'btn btn-danger')) }}

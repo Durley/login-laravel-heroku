@@ -3,8 +3,8 @@
 <head>
     <title>@yield('title', 'Aprendiendo Laravel')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    {{ HTML::style('assets/css/bootstrap.min.css', array('media' => 'screen')) }}
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 
 </head>
 {{ HTML::script('assets/js/admin.js') }}
@@ -16,7 +16,7 @@
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="//code.jquery.com/jquery.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-{{ HTML::script('assets/js/bootstrap.min.js') }}
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
