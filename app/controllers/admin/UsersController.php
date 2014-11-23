@@ -66,7 +66,11 @@ class Admin_UsersController extends \BaseController {
      */
     public function show($id)
     {
-        return 'Aqui mostramos la info del usuario: '.$id;
+        $user = User::find($id);
+
+        if (is_null($user)) App::abort(404);
+
+        return View::make('admin/users/show', array('user' => $user));
     }
 
     /**
@@ -130,7 +134,9 @@ class Admin_UsersController extends \BaseController {
      */
     public function destroy($id)
     {
-        //
+        User::destroy($id);
+
+        return Redirect::route('admin.users.create');
     }
 
 }

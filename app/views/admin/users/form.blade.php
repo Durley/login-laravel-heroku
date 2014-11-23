@@ -8,9 +8,19 @@
 
 <h1>{{ $action }} Usuarios</h1>
 
+@if ($action == 'Editar')
+{{ Form::model($user, array('route' => array('admin.users.destroy', $user->id), 'method' => 'DELETE', 'role' => 'form')) }}
+<div class="row">
+    <div class="form-group col-md-4">
+        {{ Form::submit('Eliminar usuario', array('class' => 'btn btn-danger')) }}
+    </div>
+</div>
+{{ Form::close() }}
+@else
 <p>
     <a href="/login" class="btn btn-info">Iniciar sesión</a>
 </p>
+@endif
 
 {{ Form::model($user, $form_data, array('role' => 'form')) }}
 

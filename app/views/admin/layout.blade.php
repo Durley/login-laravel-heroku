@@ -7,6 +7,7 @@
     {{ HTML::style('assets/css/bootstrap.min.css', array('media' => 'screen')) }}
 
 </head>
+{{ HTML::script('assets/js/admin.js') }}
 <body>
 <div id="wrap">
     <div class="container">
