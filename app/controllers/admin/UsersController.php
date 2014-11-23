@@ -19,7 +19,7 @@ class Admin_UsersController extends \BaseController {
      */
     public function create()
     {
-        return 'Aqui va el form para crear un usuario';
+        return View::make('admin/users/form');
     }
 
     /**
