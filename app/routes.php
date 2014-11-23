@@ -31,3 +31,4 @@ Route::post('/login', function()
 
     return Redirect::to('/');
 });
+Route::resource('admin/users', 'Admin_UsersController');
