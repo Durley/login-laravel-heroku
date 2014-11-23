@@ -1,6 +1,6 @@
 @extends ('admin/layout')
 
-@section ('title') Crear Usuarios @stop
+@section ('title') {{ $action }} Crear Usuarios @stop
 
 @section ('content')
 
@@ -11,6 +11,8 @@
 </p>
 
 {{ Form::model($user, $form_data, array('role' => 'form')) }}
+
+@include ('admin/errors', array('errors' => $errors))
 
 <div class="row">
     <div class="form-group col-md-4">
@@ -32,7 +34,7 @@
         {{ Form::password('password_confirmation', array('class' => 'form-control')) }}
     </div>
 </div>
-{{ Form::button('Crear usuario', array('type' => 'submit', 'class' => 'btn btn-primary')) }}
+{{ Form::button($action . ' usuario', array('type' => 'submit', 'class' => 'btn btn-primary')) }}
 
 {{ Form::close() }}
 
