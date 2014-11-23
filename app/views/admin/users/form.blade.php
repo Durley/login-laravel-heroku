@@ -7,7 +7,7 @@
 <h1>{{ $action }} Usuarios</h1>
 
 <p>
-    <a href="{{ route('admin.users.index') }}" class="btn btn-info">Lista de usuarios</a>
+    <a href="{{ route('/login') }}" class="btn btn-info">Iniciar sesión</a>
 </p>
 
 {{ Form::model($user, $form_data, array('role' => 'form')) }}
