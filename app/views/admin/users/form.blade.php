@@ -2,7 +2,7 @@
 
 @section ('title') {{ $action }} Usuarios @stop
 
-@include ('admin/errors', array('errors' => $errors))
+@include ('admin/users/errors', array('errors' => $errors))
 
 @section ('content')
 
