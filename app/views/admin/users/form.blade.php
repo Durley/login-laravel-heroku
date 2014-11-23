@@ -2,6 +2,8 @@
 
 @section ('title') {{ $action }} Usuarios @stop
 
+@include ('admin/errors', array('errors' => $errors))
+
 @section ('content')
 
 <h1>{{ $action }} Usuarios</h1>
@@ -11,8 +13,6 @@
 </p>
 
 {{ Form::model($user, $form_data, array('role' => 'form')) }}
-
-
 
 <div class="row">
     <div class="form-group col-md-4">
