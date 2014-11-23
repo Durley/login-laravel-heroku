@@ -1,0 +1,319 @@
+Documentación LARAVEL (Homestead): http://laravel.com/docs/4.2/homestead
+TUTORIAL 1 (Instalación Homestead): https://www.youtube.com/watch?v=vyTTq7lIbC4
+TUTORIAL 2 (Heroku): http://www.sitepoint.com/8-heroku-addons-production-ready-apps/
+
+Instalar vagrant
+
+Instalar virtualbox
+
+Instalar git
+
+abir cmd
+
+Descargar el box de homestead con vagrant: 
+vagrant box add laravel/homestead
+
+Clonar el repositorio Homestead: en ~
+~= C:/Users/NombreUser
+git clone https://github.com/laravel/homestead.git Homestead
+
+ls (debe aparecer Homestead)
+
+Crear las keys en ~/.ssh
+
+cd .ssh (para entrar a la carpeta) o mkdir .ssh (para crear la carpeta)
+
+Crear las llaves:
+ssh-keygen -t rsa -f id_rsa
+Asignar clave o simplemente Enter/Enter
+
+Volver a ~:
+cd .. 
+
+crear carpeta Code donde se guardarán los proyectos:
+mkdir Code
+
+ls (debe aparecer Code)
+
+Para windows 32bits: Desde el explorador editar Homestead/scripts/homestead.rb:
+
+# Configure The Box
+    config.vm.box = "antoniofrignani/laravel-homestead-settler-32"
+    config.vm.hostname = "homestead"
+
+Luego configurar los puertos:
+Desde el explorador editar Homestead/scripts/homestead.rb:
+
+# Configure Port Forwarding To The Box
+    config.vm.network "forwarded_port", guest: 80, host: 8000
+    config.vm.network "forwarded_port", guest: 5000, host: 5000
+    config.vm.network "forwarded_port", guest: 3306, host: 33060
+    config.vm.network "forwarded_port", guest: 5432, host: 54320
+
+volver al cmd
+
+Entrar la carpeta Homestead:
+cd Homestead
+
+Iniciar vagrant:
+vagrant up
+
+vagrant ssh
+
+exit
+
+Luego editar archivo homestead.yaml en sites, teniendo en cuenta usar espacios y no TABs
+
+sites:
+
+    - map: gimnasio.app
+
+      to: /home/vagrant/Code/carpetaproyecto/public
+
+editar archivo hosts ubicado en C:\Windows\System32\Drivers\etc y añadir la siguiente lo siguiente:
+# VAGRANT
+127.0.0.1       gimnasio.app
+
+vagrant provision
+
+vagrant ssh
+
+Instalar heroku:
+wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+
+Verificar que heroku está instalado:
+heroku --version
+
+sudo ln -s /usr/sbin/php5-fpm /usr/sbin/php-fpm
+
+sudo service nginx stop
+
+sudo service php5-fpm stop
+
+Crear las llaves para heroku:
+
+cd .ssh (para entrar a la carpeta) o mkdir .ssh (para crear la carpeta)
+
+Crear las llaves:
+ssh-keygen -t rsa -f id_rsa
+Asignar clave o simplemente Enter/Enter
+
+Volver a ~:
+cd ..
+
+Configurar el usuario y correo en git:
+git config --global user.email "YOUR EMAIL ADDRESS"
+git config --global user.name "YOUR EMAIL ADDRESS"
+
+Verificar:
+git config --global user.email
+git config --global user.name
+
+Entrar en la carpeta Code:
+cd Code
+
+Clonar el repositorio que contiene los archivos de configuración para heroku:
+git clone https://github.com/sitepoint-examples/laroku carpetaproyecto
+
+Entrar a la carpeta donde se clonaron los archivos:
+cd carpetaproyecto
+
+Instalar los archivos para el proyecto laravel:
+composer install
+
+sudo foreman start
+
+//chmod -R 0777 app/storage
+
+TUTORIAL 1 (autenticación de usuarios): http://laravelbook.com/laravel-user-authentication/
+TUTORIAL 2 (autenticación de usuario quickstart): http://fideloper.com/laravel-4-uber-quick-start-with-auth-guide
+Documentación LARAVEL (Migraciones): http://laravel.com/docs/4.2/migrations
+
+Volver al cmd y crear las migraciones que permitirán que se cren las tablas en la bases de datos:
+php artisan migrate:make LoQueVaAHacerLaMigracion --create=NombreTabla
+
+Ejemplo para la tabla usuarios:
+
+php artisan migrate:make createe_users_table --create=users
+
+Editar el archivo app/database/migrations/SOME_DATE_create_users_table.php para crear la estructura de la tabla
+
+public function up()
+{
+    Schema::create('users', function(Blueprint $table)
+    {
+        $table->increments('id');
+        $table->string('email')->unique();
+        $table->string('password');
+        $table->timestamps();
+    });
+}
+
+
+Editar el archivo app/database/seeds/DatabaseSeeder.php para probar la tabla insertando tuplas:
+
+public function run()
+{
+    Eloquent::unguard();
+
+    // Quitar los // de la línea de abajo
+    $this->call('UserTableSeeder');
+} 
+
+crear el archivo UserTableSeeder.php en app/database/seeds/
+
+editarlo:
+
+<?php
+
+class UserTableSeeder extends Seeder {
+
+    public function run()
+    {
+        DB::table('users')->delete();
+
+        User::create(array(
+            'email' => 'your@email.com',
+            'password' => Hash::make('your_password')
+        ));
+    }
+}
+
+Iniciar repositorio remoto git:
+git init
+
+Añadir archivos:
+git add .
+
+Añadir comentario:
+git commit -m "comentario"
+
+Iniciar sesión en heroku:
+heroku login
+Ingresar las credenciales y si pregunta por si desea ingresar una clave key ssh, escribir: Y
+
+Crear repositorio:
+heroku create
+
+Subir los archivos a heroku:
+git push heroku master
+
+Para la base de datos:
+
+TUTORIAL 1 (BASE DE DATOS postgeSQL): http://mattstauffer.co/blog/laravel-on-heroku-using-a-postgresql-database
+
+Añadir:
+heroku addons:add heroku-postgresql:dev
+dice que crea una base de datos HEROKU_POSTGRESQL_"COLOR"_URL
+
+Escribir
+heroku config
+para saber la url de la base de datos que se creó y si está configurada como la principal (DATABASE_URL)
+
+para seleccionar una HEROKU_POSTGRESQL_"COLOR"_URL específica como la DATABASE_URL:
+heroku pg:promote HEROKU_POSTGRESQL_"COLOR"_URL
+
+Hacer las modificaciones en el proyecto laravel (utilizar su editor de preferencia, por ejemplo PHPStorm)
+
+Editar archivo app/config/database.php
+cambiar 'default' => 'mysql' por 'default' => 'pgsql'
+
+Al principio del archivo añadir:
+$url = parse_url(getenv("DATABASE_URL"));
+
+$host = $url["host"];
+$username = $url["user"];
+$password = $url["pass"];
+$database = substr($url["path"], 1);
+
+y en la configuración de pgsql cambiarla por:
+
+'pgsql' => array(
+        'driver'   => 'pgsql',
+        'host'     => $host,
+        'database' => $database,
+        'username' => $username,
+        'password' => $password,
+        'charset'  => 'utf8',
+        'prefix'   => '',
+        'schema'   => 'public',
+    ),
+
+
+Configurar los Auth filter y routas:
+
+Editar app/filters.php:
+
+Route::filter('auth', function()
+{
+    // Slight change to redirect to login route
+    if (Auth::guest()) return Redirect::to('login');
+});
+
+Editar app/routes.php:
+
+Route::get('/', array('before' => 'auth' ,function()
+{
+    return 'Hello, '.Auth::user()->email.'!';
+}));
+
+Route::get('/login', function()
+{
+    return View::make('login');
+});
+
+Route::post('/login', function()
+{
+    // Validation? Not in my quickstart!
+    // No, but really, I'm a bad person for leaving that out
+    Auth::attempt( array('email' => Input::get('email'), 'password' => Input::get('password')) );
+
+    return Redirect::to('/');
+});
+
+Crear la vista login.blade.php:
+
+ <div class="container">
+ 
+<form class="form-signin form-horizontal" method="post" action="/login">
+<h2 class="">Please sign in</h2>
+<div class="control-group ">
+<label class="control-label" for="email">Email:</label>
+<div class="controls">
+<input type="text" id="email" name="email" placeholder="Email address" value="">
+</div>
+</div>
+<div class="control-group ">
+<label class="control-label" for="password">Password:</label>
+<div class="controls">
+<input type="password" id="password" name="password" placeholder="Password" value="">
+</div>
+</div>
+<button class="btn btn-large btn-primary" type="submit">Sign in</button>
+</form>
+</div> <!-- /container --> 
+
+Añadir archivos:
+git add .
+
+Añadir comentario:
+git commit -m "comentario"
+
+Subir los archivos a heroku:
+git push heroku master
+
+correr la migración en heroku para que se creen las tablas y se inserten las tuplas de prueba:
+heroku run php /app/artisan migrate
+heroku run php /app/artisan migrate:refresh --seed
+
+confirmar lo que se insertó a la tabla en la bd de heroku
+heroku pg:psql
+
+\d
+lista las tablas
+
+SELECT * FROM users;
+lista las tuplas añadidas
+
+\q
+para salir
