@@ -1,6 +1,6 @@
 @extends ('admin/layout')
 
-@section ('title') {{ $action }} Crear Usuarios @stop
+@section ('title') {{ $action }} Usuarios @stop
 
 @section ('content')
 

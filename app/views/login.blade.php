@@ -15,5 +15,8 @@
 </div>
 </div>
 <button class="btn btn-large btn-primary" type="submit">Sign in</button>
+    <a href="{{ route('admin.users.create') }}" class="btn btn-info">
+        {{ Form::button('Crear usuario', array('type' => 'submit', 'class' => 'btn btn-primary')) }}
+    </a>
 </form>
 </div> <!-- /container -->
