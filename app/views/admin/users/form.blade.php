@@ -2,11 +2,23 @@
 
 @section ('title') Crear Usuarios @stop
 
+@if ($errors->any())
+<div class="alert alert-danger">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Por favor corrige los siguentes errores:</strong>
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
 @section ('content')
 
 <h1>Crear Usuarios</h1>
 
-{{ Form::open(array('route' => 'admin.users.store', 'method' => 'POST'), array('role' => 'form')) }}
+{{ Form::model($user, array('route' => 'admin.users.store', 'method' => 'POST'), array('role' => 'form')) }}
 
 <div class="row">
     <div class="form-group col-md-4">

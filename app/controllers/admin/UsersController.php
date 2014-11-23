@@ -19,7 +19,9 @@ class Admin_UsersController extends \BaseController {
      */
     public function create()
     {
-        return View::make('admin/users/form');
+        // Creamos un nuevo objeto User para ser usado por el helper Form::model
+        $user = new User;
+        return View::make('admin/users/form')->with('user', $user);
     }
 
     /**
@@ -29,7 +31,26 @@ class Admin_UsersController extends \BaseController {
      */
     public function store()
     {
-        return Input::all();
+        //Creamos un nuevo objeto para nuestro nuevo usuario
+        $user = new User;
+        //Obtenemos la data enviada por el usuario
+        $data = Input::all();
+
+        //Revisamos si la data es válido
+        if ($user->isValid($data))
+        {
+            // Si la data es valida se la asignamos al usuario
+            $user->fill($data);
+            // Guardamos el usuario
+            $user->save();
+            // Y Devolvemos una redirección a la acción show para mostrar el usuario
+            return Redirect::route('admin.users.show', array($user->id));
+        }
+        else
+        {
+            // En caso de error regresa a la acción create con los datos y los errores encontrados
+            return Redirect::route('admin.users.create')->withInput()->withErrors($user->errors);
+        }
     }
 
     /**
