@@ -29,7 +29,7 @@ class Admin_UsersController extends \BaseController {
      */
     public function store()
     {
-        //
+        return Input::all();
     }
 
     /**
