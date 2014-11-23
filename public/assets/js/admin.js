@@ -25,4 +25,4 @@ $(window).ready(function() {
         });
     }
 
-}); 
+});

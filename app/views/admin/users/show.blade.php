@@ -9,7 +9,7 @@
 <p>Full name: {{ $user->full_name }}</p>
 <p>Email: {{ $user->email }}</p>
 
-{{ Form::model($user, array('route' => array('admin.users.edit', $user->id), 'method' => 'PATCH'))}}
+{{ Form::model($user, array('route' => array('admin.users.edit', $user->id), 'method' => 'PATCH'), array('role' => 'form'))}}
 {{ Form::submit('Editar usuario', array('class' => 'btn btn-primary')) }}
 {{ Form::close() }}
 
