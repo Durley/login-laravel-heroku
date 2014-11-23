@@ -73,7 +73,7 @@ return array(
 			'driver'   => 'pgsql',
 			'host'     => $host,
 			'database' => $database,
-			'username' => $usename,
+			'username' => $username,
 			'password' => $password,
 			'charset'  => 'utf8',
 			'prefix'   => '',
