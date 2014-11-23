@@ -22,7 +22,11 @@ class Admin_UsersController extends \BaseController {
     {
         // Creamos un nuevo objeto User para ser usado por el helper Form::model
         $user = new User;
-        return View::make('admin/users/form')->with('user', $user);
+        $form_data = array('route' => 'admin.users.store', 'method' => 'POST');
+        $action    = 'Crear';
+
+        return View::make('admin/users/form', compact('user', 'form_data', 'action'));
+
     }
 
     /**
@@ -79,7 +83,10 @@ class Admin_UsersController extends \BaseController {
             App::abort(404);
         }
 
-        return View::make('admin/users/form')->with('user', $user);
+        $form_data = array('route' => array('admin.users.update', $user->id), 'method' => 'PATCH');
+        $action    = 'Editar';
+
+        return View::make('admin/users/form', compact('user', 'form_data', 'action'));
     }
 
     /**

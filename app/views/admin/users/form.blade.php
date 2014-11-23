@@ -1,18 +1,5 @@
 @extends ('admin/layout')
 
-<?php
-
-if (isset($user)):
-    $form_data = array('route' => array('admin.users.update', $user->id), 'method' => 'PATCH');
-    $action = 'Editar';
-else:
-    $user = null;
-    $form_data = array('route' => 'admin.users.store', 'method' => 'POST');
-    $action = 'Crear';
-endif;
-
-?>
-
 @section ('title') {{ $action }} Usuarios @stop
 
 @section ('content')
