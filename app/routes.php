@@ -33,3 +33,9 @@ Route::post('/login', function()
     return Redirect::to('/');
 });
 Route::resource('admin/users', 'Admin_UsersController');
+Route::get('/logout', function()
+{
+    Auth::logout();
+    Session::flush();
+    return Redirect::to('/login');
+})->before('auth.basic');

@@ -19,4 +19,9 @@
 {{ Form::submit('Eliminar usuario', array('class' => 'btn btn-danger')) }}
 {{ Form::close() }}
 
+<p>
+    <a href="/logout" class="btn btn-primary">
+        Cerrar sesión
+    </a>
+</p>
 @stop
