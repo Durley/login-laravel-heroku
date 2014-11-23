@@ -15,8 +15,11 @@
 
 Route::get('/', array('before' => 'auth' ,function()
 {
-    $user = User::find(Auth::user()->email);
-    return Redirect::route('admin.users.show', array($user->id));
+    $email = Auth::user()->email;
+    $user = new User;
+    $user = User::find($email);
+    return "Hola".$user;
+    //return Redirect::route('admin.users.show', array($user->id));
 }));
 
 Route::get('/login', function()
